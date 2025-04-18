@@ -1,4 +1,4 @@
-// src/app.module.ts (lanjutan)
+// src/app.module.ts
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -24,6 +24,7 @@ import { MonitoringModule } from './modules/monitoring/monitoring.module';
 import { ReportsModule } from './modules/reports/reports.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { JobsModule } from './jobs/jobs.module';
+import { PaymentGatewayModule } from './modules/payment-gateway/payment-gateway.module';
 
 @Module({
   imports: [
@@ -73,6 +74,7 @@ import { JobsModule } from './jobs/jobs.module';
     ReportsModule,
     DashboardModule,
     JobsModule,
+    PaymentGatewayModule,
   ],
   controllers: [AppController],
   providers: [
