@@ -1,0 +1,65 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=password
+      - DB_DATABASE=star_access
+      - DB_SYNCHRONIZE=true
+      - JWT_SECRET=dev_secret_key
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:14-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=star_access
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    restart: unless-stopped
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+  freeradius:
+    image: freeradius/freeradius-server:latest
+    ports:
+      - "1812:1812/udp"
+      - "1813:1813/udp"
+    volumes:
+      - ./configs/radius:/etc/raddb
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
