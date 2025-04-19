@@ -8,7 +8,7 @@ Sistem Manajemen ISP Star Access adalah solusi komprehensif yang dirancang untuk
 
 ## ✨ Fitur
 
-- **Manajemen Pelanggan**: Melacak dan mengelola pelanggan ISP dengan profil detail
+- **Manajemen Router**: Melacak dan mengelola router dengan profil detail
 - **Integrasi PPPoE**: Manajemen pengguna dan profil PPPoE secara lengkap
 - **Autentikasi RADIUS**: Autentikasi aman melalui protokol RADIUS
 - **Integrasi MikroTik**: Integrasi API langsung dengan router MikroTik
@@ -101,7 +101,7 @@ Sebelum memulai, pastikan Anda memiliki hal-hal berikut yang sudah terpasang:
 Sistem ini menggunakan PostgreSQL sebagai database utama dengan skema berikut:
 
 - **users**: Admin dan pengguna sistem
-- **customers**: Data pelanggan ISP
+- **customers**: Data Pelanggan PPPoE
 - **pppoe_profiles**: Profil koneksi PPPoE
 - **pppoe_users**: Pengguna PPPoE yang terhubung ke profil
 - **vouchers**: Voucher internet prabayar
